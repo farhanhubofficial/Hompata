@@ -1,142 +1,155 @@
-import { useEffect, useState } from 'react'
+import { useState } from "react";
 
 export default function Header() {
-  const [isOpen, setIsOpen] = useState(false)
-
-  useEffect(() => {
-    const onKeyDown = (e) => {
-      if (e.key === 'Escape') setIsOpen(false)
-    }
-    document.addEventListener('keydown', onKeyDown)
-    return () => document.removeEventListener('keydown', onKeyDown)
-  }, [])
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/80 backdrop-blur">
-      <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-4 py-3">
+    <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/70 backdrop-blur-xl">
+      <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-3">
+        
+        {/* LOGO */}
         <a href="/" className="flex items-center">
           <img
-            src="/brand/hompata-logo.png"
+            src="/brand/hompata-logo-transparent.png"
             alt="Hompata"
-            className="h-12 w-auto max-w-[220px] object-contain saturate-150 contrast-125 drop-shadow-[0_10px_18px_rgba(0,0,0,0.22)] sm:h-14 md:h-16"
+            className="
+              h-10 sm:h-12 md:h-14 lg:h-16 
+              w-auto object-contain 
+              transition-all duration-300
+              drop-shadow-md
+            "
           />
         </a>
 
-        <nav className="hidden items-center gap-6 text-sm text-slate-600 md:flex">
-          <a className="hover:text-slate-900" href="#rent">
+        {/* DESKTOP NAV */}
+        <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
+          <a className="hover:text-slate-900 transition" href="#rent">
             Rent
           </a>
-          <a className="hover:text-slate-900" href="#buy">
+          <a className="hover:text-slate-900 transition" href="#buy">
             Buy
           </a>
-          <a className="hover:text-slate-900" href="#list">
+          <a className="hover:text-slate-900 transition" href="#list">
             List a property
           </a>
         </nav>
 
+        {/* ACTIONS */}
         <div className="flex items-center gap-2">
+          {/* MENU BUTTON */}
           <button
-            type="button"
             onClick={() => setIsOpen(true)}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-900 hover:bg-slate-50 md:hidden"
-            aria-label="Open menu"
+            className="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white shadow-sm hover:bg-slate-100 transition"
           >
-            <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden="true">
-              <path
-                fill="currentColor"
-                d="M4 6.75A.75.75 0 0 1 4.75 6h14.5a.75.75 0 0 1 0 1.5H4.75A.75.75 0 0 1 4 6.75ZM4 12a.75.75 0 0 1 .75-.75h14.5a.75.75 0 0 1 0 1.5H4.75A.75.75 0 0 1 4 12Zm0 5.25A.75.75 0 0 1 4.75 16.5h14.5a.75.75 0 0 1 0 1.5H4.75a.75.75 0 0 1-.75-.75Z"
-              />
-            </svg>
+            ☰
           </button>
+
+          {/* POST */}
           <a
             href="#list"
-            className="inline-flex h-10 items-center justify-center rounded-xl border border-slate-200 bg-white px-4 text-sm font-medium text-slate-900 hover:bg-slate-50"
+            className="hidden sm:inline-flex h-10 items-center justify-center rounded-xl border border-slate-200 bg-white px-4 text-sm font-medium text-slate-900 hover:bg-slate-100 transition"
           >
             Post listing
           </a>
+
+          {/* SIGN IN */}
           <a
             href="#"
-            className="hidden h-10 items-center justify-center rounded-xl bg-indigo-600 px-4 text-sm font-semibold text-white hover:bg-indigo-700 sm:inline-flex"
+            className="hidden md:inline-flex h-10 items-center justify-center rounded-xl bg-indigo-600 px-4 text-sm font-semibold text-white hover:bg-indigo-700 transition"
           >
             Sign in
           </a>
         </div>
       </div>
 
-      {isOpen ? (
-        <div className="fixed inset-0 z-[60] md:hidden" role="dialog" aria-modal="true">
-          <button
-            type="button"
-            className="absolute inset-0 bg-slate-900/40"
-            aria-label="Close menu"
-            onClick={() => setIsOpen(false)}
-          />
-          <aside className="absolute right-0 top-0 h-full w-[85%] max-w-sm bg-white shadow-2xl">
-            <div className="flex items-center justify-between border-b border-slate-200 px-4 py-4">
-              <img
-                src="/brand/hompata-logo.png"
-                alt="Hompata"
-                className="h-12 w-auto max-w-[200px] object-contain saturate-150 contrast-125"
-              />
+      {/* MOBILE SIDEBAR */}
+      {isOpen && (
+        <div className="fixed inset-0 z-[60] flex justify-end md:hidden">
+          
+          {/* SIDEBAR */}
+          <aside
+            className="
+              h-full w-72
+              bg-blue-900/95
+              backdrop-blur-xl
+              shadow-[0_20px_60px_rgba(0,0,0,0.4)]
+              border-l border-white/10
+              flex flex-col
+              p-4
+              transform transition-transform duration-300 ease-in-out
+              translate-x-0
+            "
+          >
+            {/* HEADER */}
+            <div className="flex items-center justify-between pb-4">
+              <p className="text-base font-semibold tracking-wide text-white">
+                Menu
+              </p>
+
               <button
-                type="button"
                 onClick={() => setIsOpen(false)}
-                className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-900 hover:bg-slate-50"
-                aria-label="Close menu"
+                className="h-10 w-10 rounded-xl bg-white/90 hover:bg-white transition"
               >
-                <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden="true">
-                  <path
-                    fill="currentColor"
-                    d="M6.22 6.22a.75.75 0 0 1 1.06 0L12 10.94l4.72-4.72a.75.75 0 1 1 1.06 1.06L13.06 12l4.72 4.72a.75.75 0 1 1-1.06 1.06L12 13.06l-4.72 4.72a.75.75 0 1 1-1.06-1.06L10.94 12 6.22 7.28a.75.75 0 0 1 0-1.06Z"
-                  />
-                </svg>
+                ✕
               </button>
             </div>
 
-            <nav className="px-4 py-4">
-              <a
-                className="flex items-center justify-between rounded-xl px-3 py-3 text-sm font-medium text-slate-900 hover:bg-slate-50"
-                href="#rent"
-                onClick={() => setIsOpen(false)}
-              >
-                Rentals
-              </a>
-              <a
-                className="mt-1 flex items-center justify-between rounded-xl px-3 py-3 text-sm font-medium text-slate-900 hover:bg-slate-50"
-                href="#buy"
-                onClick={() => setIsOpen(false)}
-              >
-                Buy
-              </a>
-              <a
-                className="mt-1 flex items-center justify-between rounded-xl px-3 py-3 text-sm font-medium text-slate-900 hover:bg-slate-50"
-                href="#list"
-                onClick={() => setIsOpen(false)}
-              >
-                List a property
-              </a>
+            {/* LINKS */}
+            <nav className="flex flex-col gap-3 py-2 text-base">
+              {["Rent", "Buy", "List a property"].map((item) => (
+                <a
+                  key={item}
+                  href={`#${item.toLowerCase().split(" ")[0]}`}
+                  onClick={() => setIsOpen(false)}
+                  className="
+                    rounded-xl
+                    bg-white/90
+                    px-4 py-3
+                    font-medium text-slate-900
+                    hover:bg-white
+                    transition
+                  "
+                >
+                  {item}
+                </a>
+              ))}
             </nav>
 
-            <div className="mt-auto border-t border-slate-200 px-4 py-4">
+            {/* BUTTONS */}
+            <div className="mt-auto pt-4">
               <a
                 href="#list"
                 onClick={() => setIsOpen(false)}
-                className="inline-flex h-11 w-full items-center justify-center rounded-xl bg-indigo-600 px-5 text-sm font-semibold text-white hover:bg-indigo-700"
+                className="
+                  w-full inline-flex h-11 items-center justify-center
+                  rounded-xl bg-indigo-600 text-white font-semibold
+                  hover:bg-indigo-700 transition
+                "
               >
                 Post listing
               </a>
+
               <a
                 href="#"
                 onClick={() => setIsOpen(false)}
-                className="mt-3 inline-flex h-11 w-full items-center justify-center rounded-xl border border-slate-200 bg-white px-5 text-sm font-semibold text-slate-900 hover:bg-slate-50"
+                className="
+                  mt-3 w-full inline-flex h-11 items-center justify-center
+                  rounded-xl bg-white/90 text-slate-900 font-semibold
+                  hover:bg-white transition
+                "
               >
                 Sign in
               </a>
             </div>
           </aside>
-        </div>
-      ) : null}
-    </header>
-  )
-}
 
+          {/* OVERLAY (LEFT SIDE TRANSPARENCY) */}
+          <div
+            className="flex-1 bg-black/40 backdrop-blur-sm"
+            onClick={() => setIsOpen(false)}
+          />
+        </div>
+      )}
+    </header>
+  );
+}

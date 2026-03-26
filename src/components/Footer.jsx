@@ -5,9 +5,9 @@ export default function Footer() {
         <div className="md:col-span-2">
           <div className="flex items-center gap-3">
             <img
-              src="/brand/hompata-logo.png"
+              src="/brand/hompata-logo-transparent.png"
               alt="Hompata"
-              className="h-14 w-auto max-w-[240px] object-contain saturate-150 contrast-125 drop-shadow-[0_10px_18px_rgba(0,0,0,0.22)]"
+              className="h-16 w-auto max-w-[320px] object-contain saturate-125 contrast-125 drop-shadow-[0_8px_16px_rgba(0,0,0,0.2)] sm:h-20"
             />
           </div>
           <p className="mt-2 max-w-md text-sm text-slate-600">
